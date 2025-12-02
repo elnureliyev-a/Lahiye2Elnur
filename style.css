@@ -1,0 +1,200 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto:400,900");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  min-width: 1152px;
+}
+
+.todo-container {
+  width: 336px;
+  border: 1px solid #c4c4c4;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.todo-header {
+  width: 100%;
+  height: 28px;
+  background: linear-gradient(to right, #f4d03f, #f4d03f);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.todo-header img {
+  width: 100%;
+  height: 100%;
+}
+
+.todo-content {
+  padding: 13px 28px 18px 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.todo-title-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.todo-title {
+  font-family: "Roboto", Helvetica;
+  font-weight: 900;
+  font-size: 26px;
+  color: black;
+  text-align: center;
+  flex: 1;
+}
+
+.sort-button {
+  width: 25px;
+  height: 15px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: opacity 0.2s ease;
+}
+
+.sort-button:hover {
+  opacity: 0.7;
+}
+
+.sort-button img {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.2s ease;
+}
+
+.sort-button.desc img {
+  transform: scaleY(-1);
+}
+
+.tasks-list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.task-item {
+  position: relative;
+  width: 100%;
+  cursor: move;
+  transition: opacity 0.2s ease;
+}
+
+.task-item.dragging {
+  opacity: 0.5;
+}
+
+.task-input {
+  width: 100%;
+  height: 40px;
+  border: 1px solid #c4c4c4;
+  border-radius: 10px;
+  padding: 0 10px;
+  font-family: "Roboto", Helvetica;
+  font-size: 14px;
+  padding-right: 40px;
+}
+
+.task-input:focus {
+  outline: none;
+  border-color: #833ae0;
+  box-shadow: 0 0 0 2px rgba(131, 58, 224, 0.1);
+}
+
+.delete-button {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: opacity 0.2s ease;
+}
+
+.delete-button:hover {
+  opacity: 0.7;
+}
+
+.delete-button img {
+  width: 100%;
+  height: 100%;
+}
+
+.add-button-container {
+  position: relative;
+  width: 150px;
+  height: 42px;
+  margin-top: 18px;
+}
+
+.add-button {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #833ae0;
+  border: none;
+  border-radius: 71px;
+  font-family: "Roboto", Helvetica;
+  font-weight: 400;
+  font-size: 14px;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.add-button:hover {
+  background-color: #7333cc;
+}
+
+.add-button-plus {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 42px;
+  height: 42px;
+  background-color: #9853f1;
+  border-radius: 71px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Roboto", Helvetica;
+  font-weight: 400;
+  font-size: 14px;
+  color: white;
+  pointer-events: none;
+}
