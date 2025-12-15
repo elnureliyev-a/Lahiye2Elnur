@@ -1,387 +1,86 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>To-do List</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <style>
-      @import url("https://fonts.googleapis.com/css?family=Roboto:400,900");
-
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      body {
-        font-family: "Roboto", sans-serif;
-        background-color: white;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 100vh;
-        min-width: 1152px;
-      }
-
-      .todo-container {
-        width: 336px;
-        border: 1px solid #c4c4c4;
-        border-radius: 10px;
-        overflow: hidden;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-      }
-
-      .todo-header {
-        width: 100%;
-        height: 28px;
-        background: linear-gradient(to right, #f4d03f, #f4d03f);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-
-      .todo-header img {
-        width: 100%;
-        height: 100%;
-      }
-
-      .todo-content {
-        padding: 13px 28px 18px 28px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .todo-title-bar {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        width: 100%;
-        margin-bottom: 16px;
-      }
-
-      .todo-title {
-        font-family: "Roboto", Helvetica;
-        font-weight: 900;
-        font-size: 26px;
-        color: black;
-        text-align: center;
-        flex: 1;
-      }
-
-      .sort-button {
-        width: 25px;
-        height: 15px;
-        background: none;
-        border: none;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 0;
-        transition: opacity 0.2s ease;
-      }
-
-      .sort-button:hover {
-        opacity: 0.7;
-      }
-
-      .sort-button img {
-        width: 100%;
-        height: 100%;
-        transition: transform 0.2s ease;
-      }
-
-      .sort-button.desc img {
-        transform: scaleY(-1);
-      }
-
-      .tasks-list {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        gap: 18px;
-      }
-
-      .task-item {
-        position: relative;
-        width: 100%;
-        cursor: move;
-        transition: opacity 0.2s ease;
-      }
-
-      .task-item.dragging {
-        opacity: 0.5;
-      }
-
-      .task-input {
-        width: 100%;
-        height: 40px;
-        border: 1px solid #c4c4c4;
-        border-radius: 10px;
-        padding: 0 10px 0 10px;
-        font-family: "Roboto", Helvetica;
-        font-size: 14px;
-        padding-right: 40px;
-      }
-
-      .task-input:focus {
-        outline: none;
-        border-color: #833ae0;
-        box-shadow: 0 0 0 2px rgba(131, 58, 224, 0.1);
-      }
-
-      .delete-button {
-        position: absolute;
-        right: 8px;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 20px;
-        height: 20px;
-        background: none;
-        border: none;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 0;
-        transition: opacity 0.2s ease;
-      }
-
-      .delete-button:hover {
-        opacity: 0.7;
-      }
-
-      .delete-button img {
-        width: 100%;
-        height: 100%;
-      }
-
-      .add-button-container {
-        position: relative;
-        width: 150px;
-        height: 42px;
-        margin-top: 18px;
-      }
-
-      .add-button {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: #833ae0;
-        border: none;
-        border-radius: 71px;
-        font-family: "Roboto", Helvetica;
-        font-weight: 400;
-        font-size: 14px;
-        color: white;
-        cursor: pointer;
-        transition: background-color 0.2s ease;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-
-      .add-button:hover {
-        background-color: #7333cc;
-      }
-
-      .add-button-plus {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 42px;
-        height: 42px;
-        background-color: #9853f1;
-        border-radius: 71px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-family: "Roboto", Helvetica;
-        font-weight: 400;
-        font-size: 14px;
-        color: white;
-        pointer-events: none;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="todo-container">
-      <div class="todo-header">
-        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 336 28'%3E%3Crect fill='%23f4d03f' width='336' height='28'/%3E%3C/svg%3E" alt="Rectangle" />
-      </div>
-
-      <div class="todo-content">
-        <div class="todo-title-bar">
-          <div></div>
-          <h1 class="todo-title">To-do List</h1>
-          <button class="sort-button" id="sortButton">
-            <svg width="25" height="15" viewBox="0 0 25 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M2 2L12 12L22 2" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </button>
-        </div>
-
-        <div class="tasks-list" id="tasksList"></div>
-
-        <div class="add-button-container">
-          <button class="add-button" id="addButton">Добавить</button>
-          <div class="add-button-plus">+</div>
-        </div>
-      </div>
-    </div>
-
-    <script>
-      let tasks = [{ id: 1, text: "" }];
-      let taskIdCounter = 2;
-      let sortOrder = "none";
-      let draggedIndex = null;
-
-      const tasksList = document.getElementById("tasksList");
-      const addButton = document.getElementById("addButton");
-      const sortButton = document.getElementById("sortButton");
-
-      function renderTasks() {
-        tasksList.innerHTML = "";
-
-        tasks.forEach((task, index) => {
-          const taskItem = document.createElement("div");
-          taskItem.className = "task-item";
-          taskItem.draggable = true;
-          taskItem.dataset.index = index;
-
-          const input = document.createElement("input");
-          input.type = "text";
-          input.className = "task-input";
-          input.placeholder = "";
-          input.value = task.text;
-
-          input.addEventListener("change", (e) => {
-            tasks[index].text = e.target.value;
-          });
-
-          input.addEventListener("input", (e) => {
-            tasks[index].text = e.target.value;
-          });
-
-          const deleteBtn = document.createElement("button");
-          deleteBtn.className = "delete-button";
-          deleteBtn.innerHTML = `
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M3 5H17M8 9V15M12 9V15M2 5L3 17C3 18.1046 3.89543 19 5 19H15C16.1046 19 17 18.1046 17 17L18 5M7 5V3C7 2.44772 7.44772 2 8 2H12C12.5523 2 13 2.44772 13 3V5" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          `;
-
-          deleteBtn.addEventListener("click", () => {
-            deleteTask(index);
-          });
-
-          taskItem.appendChild(input);
-          taskItem.appendChild(deleteBtn);
-
-          taskItem.addEventListener("dragstart", () => {
-            draggedIndex = index;
-            taskItem.classList.add("dragging");
-          });
-
-          taskItem.addEventListener("dragend", () => {
-            taskItem.classList.remove("dragging");
-            draggedIndex = null;
-          });
-
-          taskItem.addEventListener("dragover", (e) => {
-            e.preventDefault();
-          });
-
-          taskItem.addEventListener("drop", (e) => {
-            e.preventDefault();
-            if (draggedIndex !== null && draggedIndex !== index) {
-              const draggedTask = tasks[draggedIndex];
-              tasks.splice(draggedIndex, 1);
-              tasks.splice(index, 0, draggedTask);
-              renderTasks();
-            }
-          });
-
-          tasksList.appendChild(taskItem);
-        });
-      }
-
-      function addTask() {
-        tasks.push({ id: taskIdCounter++, text: "" });
-        renderTasks();
-      }
-
-      function deleteTask(index) {
-        tasks.splice(index, 1);
-        renderTasks();
-      }
-
-      function sortTasks() {
-        if (sortOrder === "none" || sortOrder === "desc") {
-          sortOrder = "asc";
-          tasks.sort((a, b) => a.text.localeCompare(b.text, "az"));
-        } else {
-          sortOrder = "desc";
-          tasks.sort((a, b) => b.text.localeCompare(a.text, "az"));
-        }
-
-        if (sortOrder === "desc") {
-          sortButton.classList.add("desc");
-        } else {
-          sortButton.classList.remove("desc");
-        }
-
-        renderTasks();
-      }
-
-      addButton.addEventListener("click", addTask);
-      sortButton.addEventListener("click", sortTasks);
-
-      renderTasks();
-    </script>
-  </body>
-</html> -->
-
-
-
-
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>To-do List</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <div class="todo-container">
-      <div class="todo-header">
-        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 336 28'%3E%3Crect fill='%23f4d03f' width='336' height='28'/%3E%3C/svg%3E" alt="Rectangle" />
-      </div>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valyuta konvertoru</title>
+    <link rel="icon" type="image/x-icon" href="./img/site-icon.png">
+    <link rel="stylesheet" href="./style.css">
+</head>
 
-      <div class="todo-content">
-        <div class="todo-title-bar">
-          <div></div>
-          <h1 class="todo-title">To-do List</h1>
-          <button class="sort-button" id="sortButton">
-            <svg width="25" height="15" viewBox="0 0 25 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M2 2L12 12L22 2" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </button>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="three-line">
+                <div class="menu">
+                    <img src="./img/group.svg" alt="menu-tree-line">
+                </div>
+            </div>
+            <div class="logo-container">
+                <img src="./img/icon.svg" alt="logo" class="logo">
+            </div>
+            <div class="menu-container">
+                <p>БАНК</p>
+                <p>БИЗНЕС</p>
+                <p>ИНВЕСТИЦИИ</p>
+                <p>СТРАХОВАНИЕ</p>
+                <p>МОБАЙЛ</p>
+                <p>ПУТЕШЕСТВИЯ</p>
+                <p>РАЗВЛЕЧЕНИЯ</p>
+            </div>
+                <div class="login">ВОЙТИ</div>
         </div>
-
-        <div class="tasks-list" id="tasksList"></div>
-
-        <div class="add-button-container">
-          <button class="add-button" id="addButton">Добавить</button>
-          <div class="add-button-plus">+</div>
+        <div class="menu-three-line dis-none">
+            <p>БАНК</p>
+            <p>БИЗНЕС</p>
+            <p>ИНВЕСТИЦИИ</p>
+            <p>СТРАХОВАНИЕ</p>
+            <p>МОБАЙЛ</p>
+            <p>ПУТЕШЕСТВИЯ</p>
+            <p>РАЗВЛЕЧЕНИЯ</p>
         </div>
-      </div>
+    </header>
+    <main>
+        <div class="main-container">
+            <h1>Конвертер валют онлайн</h1>
+            <div class="buttons">
+                <div class="input-header">
+                    <p class="text-one">У меня есть </p>
+                    <div class="button-one">
+                        <button class="one-rub choice">RUB</button>
+                        <button class="one-usd">USD</button>
+                        <button class="one-eur">EUR</button>
+                        <button class="one-gbp">GBP</button>
+                    </div>
+                    <div class="inputs">
+                        <div class="input-one">
+                            <input type="text">
+                            <p class="input-footer-text-one">1 RUB = 0.013 USD</p>
+                        </div>
+                </div>
+            </div>
+                <div class="input-header">
+                    <p class="text-two">Хочу приобрести</p>
+                    <div class="button-two">
+                        <button class="two-rub">RUB</button>
+                        <button class="two-usd choice">USD</button>
+                        <button class="two-eur">EUR</button>
+                        <button class="two-gbp">GBP</button>
+                    </div>
+                    <div class="inputs">
+                    <div class="input-two">
+                        <input type="text">
+                        <p class="input-footer-text-two">1 USD = 79.71 RUB</p>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <div class="dis-none internet">
+                <p>⚠️No Internet</p>
+            </div>
     </div>
+    </main>
+    <script src="./app.js"></script>
+</body>
 
-    <script src="script.js"></script>
-  </body>
 </html>
